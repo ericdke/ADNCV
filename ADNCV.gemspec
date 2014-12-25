@@ -8,8 +8,8 @@ Gem::Specification.new do |spec|
   spec.version       = ADNCV::VERSION
   spec.authors       = ["Eric Dejonckheere"]
   spec.email         = ["eric@aya.io"]
-  spec.summary       = %q{TODO: Write a short summary. Required.}
-  spec.description   = %q{TODO: Write a longer description. Optional.}
+  spec.summary       = %q{Statistics from your App.net data.}
+  spec.description   = %q{Statistics from your downloaded App.net data.}
   spec.homepage      = ""
   spec.license       = "MIT"
 

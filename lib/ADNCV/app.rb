@@ -6,7 +6,8 @@ module ADNCV
     desc "version", "Show the current version (-v)"
     map "-v" => :version
     def version
-      puts VERSION
+      display = Display.new
+      display.version
     end
 
   end
