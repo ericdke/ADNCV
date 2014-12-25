@@ -5,15 +5,27 @@ module ADNCV
     require_relative "display"
     require_relative "data"
 
-    desc "extract", "Extract"
-    map "-e" => :extract
-    def extract(file)
+    desc "display", "Extract"
+    map "-d" => :display
+    def display(file)
       data = Data.new
       display = Display.new
       display.analyzing
       data.extract(file)
       display.done
-      puts data.inspect
+      data.display
+    end
+
+    desc "export", "Export"
+    map "-e" => :export
+    def export(file)
+      data = Data.new
+      display = Display.new
+      display.analyzing
+      data.extract(file)
+      display.done
+      data.export
+      display.exported(data.export_path)
     end
 
     desc "version", "Show the current version (-v)"

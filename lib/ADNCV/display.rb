@@ -18,5 +18,9 @@ module ADNCV
       @thor.say_status :done, "Parsed and sorted", :green
     end
 
+    def exported(filename)
+      @thor.say_status :done, "Data exported in #{filename}", :green
+    end
+
   end
 end

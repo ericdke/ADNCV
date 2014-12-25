@@ -2,13 +2,15 @@
 module ADNCV
   class Data
 
-    attr_reader :count, :leadings, :without_mentions, :mentions_not_directed, :replies, :mentions_not_replies, :with_links, :sources, :all_links, :directed_users, :names, :clients, :mentions
+    attr_reader :filename, :count, :leadings, :without_mentions, :mentions_not_directed, :replies, :mentions_not_replies, :with_links, :sources, :all_links, :directed_users, :names, :clients, :mentions, :all_clients, :all_mentioned
+    attr_accessor :export_path
 
     def initialize
       
     end
 
     def extract(file)
+      @filename = file
       decoded = JSON.parse(File.read(file))
       @count = decoded.size
 
@@ -50,17 +52,56 @@ module ADNCV
       end
 
       all_directed = directed.sort_by {|k,v| v}
-      all_clients = @clients.sort_by {|k,v| v}
-      all_mentioned = mentioned.sort_by {|k,v| v}.uniq
+      @all_clients = @clients.sort_by {|k,v| v}
+      @all_mentioned = mentioned.sort_by {|k,v| v}.uniq
       @all_links = links.uniq.sort
-      @names = all_mentioned.map {|k,v| "#{k} (#{v})"}
-      @sources = all_clients.map {|k,v| "#{k} (#{v})"}
+      @names = @all_mentioned.map {|k,v| "#{k} (#{v})"}
+      @sources = @all_clients.map {|k,v| "#{k} (#{v})"}
       @directed_users = all_directed.uniq.map {|k,v| "#{k} (#{v})"}
 
       @without_mentions = count - @mentions
       @mentions_not_directed = @mentions - @leadings
       @mentions_not_replies = @mentions - @replies
 
+    end
+
+    def export
+      export = {
+        meta: {
+          created_at: Time.now,
+          from_file: @filename,
+          with_version: VERSION
+        },
+        data: {
+          posts: {
+            total: @count,
+            data: [{
+              without_mentions: @without_mentions,
+              directed: @leadings,
+              directed_to_unique_users: @directed_users.size,
+              with_mentions_not_directed: @mentions_not_directed,
+              with_mentions_are_replies: @replies,
+              with_mentions_are_not_replies: @mentions_not_replies,
+              with_links: @with_links
+            }]
+          },
+          users: {
+            total: @all_mentioned.size,
+            data: @all_mentioned.reverse
+          },
+          clients: {
+            total: @all_clients.size,
+            data: @all_clients.reverse
+          },
+          links: {
+            total: @with_links,
+            data: @all_links
+          }
+        }
+      }
+
+      @export_path = "#{Dir.home}/adndata_export.json"
+      File.write(@export_path, export.to_json)
     end
 
   end
