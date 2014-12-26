@@ -4,13 +4,13 @@ $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
 require 'ADNCV/version'
 
 Gem::Specification.new do |spec|
-  spec.name          = "ADNCV"
+  spec.name          = "adncv"
   spec.version       = ADNCV::VERSION
   spec.authors       = ["Eric Dejonckheere"]
   spec.email         = ["eric@aya.io"]
   spec.summary       = %q{Statistics from your App.net data.}
   spec.description   = %q{Statistics from your downloaded App.net data.}
-  spec.homepage      = ""
+  spec.homepage      = "https://github.com/ericdke/ADNCV"
   spec.license       = "MIT"
 
   spec.bindir        = 'bin'
