@@ -7,9 +7,10 @@ module ADNCV
 
     desc "display", "Extract"
     map "-d" => :display
+    option :full, aliases: "-f", type: :boolean, desc: "Display full details"
     def display(file)
       analyze(file)
-      @display.show(@data)
+      @display.show(@data, options)
     end
 
     desc "export", "Export"

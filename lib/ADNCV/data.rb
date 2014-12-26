@@ -63,9 +63,9 @@ module ADNCV
       @all_clients = @clients.sort_by {|k,v| v}
       @all_mentioned = mentioned.sort_by {|k,v| v}.uniq
       @all_links = links.uniq.sort
-      @names = @all_mentioned.map {|k,v| "#{k} (#{v})"}
+      @names = @all_mentioned.map {|k,v| "@#{k} (#{v})"}
       @sources = @all_clients.map {|k,v| "#{k} (#{v})"}
-      @directed_users = all_directed.uniq.map {|k,v| "#{k} (#{v})"}
+      @directed_users = all_directed.uniq.map {|k,v| "@#{k} (#{v})"}
 
       @without_mentions = count - @mentions
       @mentions_not_directed = @mentions - @leadings
@@ -90,7 +90,9 @@ module ADNCV
               with_mentions_not_directed: @mentions_not_directed,
               with_mentions_are_replies: @replies,
               with_mentions_are_not_replies: @mentions_not_replies,
-              with_links: @with_links
+              with_links: @with_links,
+              have_been_reposted: @reposts,
+              have_been_starred: @stars
             }]
           },
           users: {

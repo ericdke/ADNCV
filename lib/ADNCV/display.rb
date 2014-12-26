@@ -27,8 +27,8 @@ module ADNCV
       puts "\e[H\e[2J"
     end
 
-    def show(data)
-     clear_screen()
+    def show(data, options)
+      clear_screen()
       puts "Total posts:".ljust(50) + "#{data.count}" + "\n\n"
       puts "Without mentions:".ljust(50) + "#{data.without_mentions}" + "\n\n"
       puts "Directed to a user:".ljust(50) + "#{data.leadings}" + "\n\n"
@@ -38,10 +38,14 @@ module ADNCV
       puts "Containing links:".ljust(50) + "#{data.with_links}" + "\n\n"
       puts "Times your posts have been reposted:".ljust(50) + "#{data.reposts}" + "\n\n"
       puts "Times your posts have been starred:".ljust(50) + "#{data.stars}" + "\n\n"
-      # puts "All your links:".ljust(50) + "#{all_links.join(', ')}" + "\n\n"
       puts "Users you've posted directly to:".ljust(50) + "#{data.directed_users.size}" + "\n\n"
       puts "Users you've mentioned:".ljust(50) + "#{data.names.size}" + "\n\n"
       puts "You've posted with #{data.clients.size} clients:\n\n#{data.sources.reverse.join(', ')}" + "\n\n"
+      if options["full"]
+        puts "Your posted links:".ljust(50) + "#{data.all_links.join(', ')}" + "\n\n"
+        puts "Users you've posted directly to: #{data.directed_users.reverse.join(', ')}" + "\n\n"
+        puts "Users you've mentioned: #{data.names.reverse.join(', ')}" + "\n\n"
+      end
     end
 
   end
