@@ -100,7 +100,7 @@ module ADNCV
         }
       }
 
-      @export_path = "#{Dir.home}/adndata_export.json"
+      @export_path = "#{Dir.home}/adncv_export.json"
       File.write(@export_path, export.to_json)
     end
 
