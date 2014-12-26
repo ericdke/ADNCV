@@ -36,6 +36,8 @@ module ADNCV
       puts "Containing mentions and are replies:".ljust(50) + "#{data.replies}" + "\n\n"
       puts "Containing mentions and are not replies:".ljust(50) + "#{data.mentions_not_replies}" + "\n\n"
       puts "Containing links:".ljust(50) + "#{data.with_links}" + "\n\n"
+      puts "Times your posts have been reposted:".ljust(50) + "#{data.reposts}" + "\n\n"
+      puts "Times your posts have been starred:".ljust(50) + "#{data.stars}" + "\n\n"
       # puts "All your links:".ljust(50) + "#{all_links.join(', ')}" + "\n\n"
       puts "Users you've posted directly to:".ljust(50) + "#{data.directed_users.size}" + "\n\n"
       puts "Users you've mentioned:".ljust(50) + "#{data.names.size}" + "\n\n"
