@@ -6,8 +6,20 @@ module ADNCV
       @thor = Thor::Shell::Color.new
     end
 
+    def banner
+      <<-ADNCV
+   ___   ___  _  ________   __
+  / _ | / _ \\/ |/ / ___/ | / /
+ / __ |/ // /    / /__ | |/ / 
+/_/ |_/____/_/|_/\\___/ |___/  
+                              
+      ADNCV
+    end
+
     def version
+      puts banner()
       @thor.say_status :version, "#{VERSION}", :red
+      puts "\n"
     end
 
     def analyzing
