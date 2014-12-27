@@ -35,7 +35,6 @@ module ADNCV
       @display = Display.new
       @display.analyzing
       @data.extract(file)
-      # @display.done
     end
 
   end
