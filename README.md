@@ -12,9 +12,7 @@ Statistics from your App.net data.
 
 3. Run the Gem on the downloaded file:
 
-```
-adncv -d /path/to/appdotnet-data-you-xxxxx-posts.json
-```  
+`adncv -d /path/to/appdotnet-data-you-xxxxx-posts.json`
 
 ## Commands
 
@@ -24,12 +22,36 @@ adncv -d /path/to/appdotnet-data-you-xxxxx-posts.json
 
 Displays informations.
 
-Add `-f` for full details (all posted links, mentioned users, etc).
+Add `-f` for full details (posted links, mentioned users, posts per month, etc):
+
+`adncv -d -f posts.json`
 
 ### Export
 
 `adncv -e posts.json`
 
-Exports informations as a JSON file, including all your posted links and mentioned users.
+Exports informations as a JSON file, including full details.
 
-Add `-p` to specify the destination folder path (default: in ~).
+Add `-p` to specify the destination folder path (default: ~):
+
+`adncv -e posts.json -p ~/Documents`
+
+## Content
+
+ADNCV will display/export:
+
+- total posts
+- posts without mentions
+- posts directed to a user
+- posts containing mentions but not directed
+- posts containing mentions and are replies
+- posts containing mentions and are not replies
+- posts containing links
+- times your posts have been reposted
+- times your posts have been starred
+- times your posts have been replied
+- list of users you've posted directly to
+- list of users you've mentioned
+- list of clients you've posted with
+- all your posted links
+- your monthly posting frequency

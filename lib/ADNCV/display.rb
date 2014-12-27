@@ -32,7 +32,7 @@ module ADNCV
     end
 
     def exported(filename)
-      @thor.say_status :done, "Data exported in #{filename}", :green
+      @thor.say_status :done, "Data exported in #{filename}\n", :green
     end
 
     def clear_screen

@@ -109,7 +109,7 @@ module ADNCV
               have_been_reposted: @reposts,
               have_been_starred: @stars,
               have_been_replied: @been_replied,
-              posts_per_months: @freq
+              posts_per_month: @freq
             }]
           },
           users: {
