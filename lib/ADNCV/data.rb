@@ -73,7 +73,15 @@ module ADNCV
 
     end
 
-    def export
+    def export(options)
+      root = if options["path"]
+        options["path"]
+      else
+        Dir.home
+      end
+
+      @export_path = "#{root}/adncv_export.json"
+
       export = {
         meta: {
           created_at: Time.now,
@@ -110,7 +118,6 @@ module ADNCV
         }
       }
 
-      @export_path = "#{Dir.home}/adncv_export.json"
       File.write(@export_path, export.to_json)
     end
 

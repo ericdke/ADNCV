@@ -13,7 +13,7 @@ Statistics from your App.net data.
 3. Run the Gem on the downloaded file:
 
 ```
-adncv /path/to/appdotnet-data-you-xxxxx-posts.json
+adncv -d /path/to/appdotnet-data-you-xxxxx-posts.json
 ```  
 
 ## Commands
@@ -31,3 +31,5 @@ Add `-f` for full details (all posted links, mentioned users, etc).
 `adncv -e posts.json`
 
 Exports informations as a JSON file, including all your posted links and mentioned users.
+
+Add `-p` to specify the destination folder path (default: in ~).

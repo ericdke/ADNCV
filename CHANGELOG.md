@@ -1,3 +1,7 @@
+# 0.3
+
+Custom path for exported file.
+
 # 0.2
 
 Added details option for display.

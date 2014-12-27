@@ -15,9 +15,10 @@ module ADNCV
 
     desc "export", "Export your account statistics (-e)"
     map "-e" => :export
+    option :path, aliases: "-p", type: :string, desc: "Specify the path for the exported file"
     def export(file)
       analyze(file)
-      @data.export
+      @data.export(options)
       @display.exported(@data.export_path)
     end
 
