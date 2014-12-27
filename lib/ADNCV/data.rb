@@ -2,7 +2,7 @@
 module ADNCV
   class Data
 
-    attr_reader :filename, :count, :leadings, :without_mentions, :mentions_not_directed, :replies, :mentions_not_replies, :with_links, :sources, :all_links, :directed_users, :names, :clients, :mentions, :all_clients, :all_mentioned, :reposts, :stars
+    attr_reader :filename, :count, :leadings, :without_mentions, :mentions_not_directed, :replies, :mentions_not_replies, :with_links, :sources, :all_links, :directed_users, :names, :clients, :mentions, :all_clients, :all_mentioned, :reposts, :stars, :been_replied
     attr_accessor :export_path
 
     def initialize
@@ -21,6 +21,7 @@ module ADNCV
       @with_links = 0
       @reposts = 0
       @stars = 0
+      @been_replied = 0
       mentioned = Hash.new(0) 
       directed = Hash.new(0)
       is_reply = Hash.new(0)
@@ -56,6 +57,9 @@ module ADNCV
         end
         unless post["num_stars"].nil?
           @stars += post["num_stars"]
+        end
+        unless post["num_replies"].nil?
+          @been_replied += post["num_replies"]
         end
       end
 

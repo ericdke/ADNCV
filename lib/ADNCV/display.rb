@@ -50,6 +50,7 @@ module ADNCV
       puts "Containing links:".ljust(50) + "#{data.with_links}" + "\n\n"
       puts "Times your posts have been reposted:".ljust(50) + "#{data.reposts}" + "\n\n"
       puts "Times your posts have been starred:".ljust(50) + "#{data.stars}" + "\n\n"
+      puts "Times your posts have been replied:".ljust(50) + "#{data.been_replied}" + "\n\n"
       puts "Users you've posted directly to:".ljust(50) + "#{data.directed_users.size}" + "\n\n"
       puts "Users you've mentioned:".ljust(50) + "#{data.names.size}" + "\n\n"
       puts "You've posted with #{data.clients.size} clients:\n\n#{data.sources.reverse.join(', ')}" + "\n\n"
