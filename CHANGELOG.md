@@ -1,3 +1,7 @@
+# 0.4
+
+Monthly posting frequency.
+
 # 0.3
 
 Custom path for exported file.

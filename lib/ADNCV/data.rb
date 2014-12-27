@@ -108,7 +108,8 @@ module ADNCV
               with_links: @with_links,
               have_been_reposted: @reposts,
               have_been_starred: @stars,
-              have_been_replied: @been_replied
+              have_been_replied: @been_replied,
+              posts_per_months: @freq
             }]
           },
           users: {
@@ -126,7 +127,7 @@ module ADNCV
         }
       }
 
-      File.write(@export_path, export.to_json)
+      File.write(@export_path, JSON.pretty_generate(export))
     end
 
   end
