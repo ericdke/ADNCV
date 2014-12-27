@@ -1,3 +1,5 @@
+[![Gem Version](https://badge.fury.io/rb/adncv.svg)](http://badge.fury.io/rb/adncv)
+
 # ADNCV
 
 Statistics from your App.net data.
