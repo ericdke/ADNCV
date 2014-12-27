@@ -104,7 +104,8 @@ module ADNCV
               with_mentions_are_not_replies: @mentions_not_replies,
               with_links: @with_links,
               have_been_reposted: @reposts,
-              have_been_starred: @stars
+              have_been_starred: @stars,
+              have_been_replied: @been_replied
             }]
           },
           users: {
