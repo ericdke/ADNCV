@@ -2,7 +2,7 @@
 module ADNCV
   class Data
 
-    attr_reader :filename, :count, :leadings, :without_mentions, :mentions_not_directed, :replies, :mentions_not_replies, :with_links, :sources, :all_links, :directed_users, :names, :clients, :mentions, :all_clients, :all_mentioned, :reposts, :stars, :been_replied
+    attr_reader :filename, :count, :leadings, :without_mentions, :mentions_not_directed, :replies, :mentions_not_replies, :with_links, :sources, :all_links, :directed_users, :names, :clients, :mentions, :all_clients, :all_mentioned, :reposts, :stars, :been_replied, :freq
     attr_accessor :export_path
 
     def initialize
@@ -26,6 +26,7 @@ module ADNCV
       directed = Hash.new(0)
       is_reply = Hash.new(0)
       @clients = Hash.new(0)
+      @freq = Hash.new(0)
 
       decoded.each do |post|
         @clients[post["source"]["name"]] += 1
@@ -61,6 +62,8 @@ module ADNCV
         unless post["num_replies"].nil?
           @been_replied += post["num_replies"]
         end
+        dd = Date.parse(post["created_at"])
+        @freq[[dd.year, dd.month]] += 1
       end
 
       all_directed = directed.sort_by {|k,v| v}

@@ -55,9 +55,14 @@ module ADNCV
       puts "Users you've mentioned:".ljust(50) + "#{data.names.size}" + "\n\n"
       puts "You've posted with #{data.clients.size} clients:\n\n#{data.sources.reverse.join(', ')}" + "\n\n"
       if options["full"]
-        puts "Your posted links:".ljust(50) + "#{data.all_links.join(', ')}" + "\n\n"
+        puts "Your posted links: #{data.all_links.join(', ')}" + "\n\n"
         puts "Users you've posted directly to: #{data.directed_users.reverse.join(', ')}" + "\n\n"
         puts "Users you've mentioned: #{data.names.reverse.join(', ')}" + "\n\n"
+        puts "Your monthly posting frequency:\n\n"
+        @thor.print_table([["Year", "Month", "Posts\n"]])
+        puts "------------------"
+        @thor.print_table(data.freq)
+        puts "\n"
       end
     end
 
