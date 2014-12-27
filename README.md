@@ -22,6 +22,8 @@ adncv /path/to/appdotnet-data-you-xxxxx-posts.json
 
 Displays informations.
 
+Add `-f` for full details (all posted links, mentioned users, etc).
+
 ### Export
 
 `adncv -e posts.json`
