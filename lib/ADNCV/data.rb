@@ -2,18 +2,39 @@
 module ADNCV
   class Data
 
-    attr_reader :filename, :count, :leadings, :without_mentions, :mentions_not_directed, :replies, :mentions_not_replies, :with_links, :sources, :all_links, :directed_users, :names, :clients, :mentions, :all_clients, :all_mentioned, :reposts, :stars, :been_replied, :freq
+    attr_reader :filename, :count, :leadings, :without_mentions, :mentions_not_directed, :replies, :mentions_not_replies, :with_links, :sources, :all_links, :directed_users, :names, :clients, :mentions, :all_clients, :all_mentioned, :reposts, :stars, :been_replied, :freq, :type, :all_directed
     attr_accessor :export_path
 
-    def initialize
+    # def initialize
       
+    # end
+
+    def extract(file, options = {})
+      @filename = file
+      @decoded = JSON.parse(File.read(file))
+      
+      if options["messages"]
+        @type = :messages
+        extract_messages(file)
+      else
+        @type = :posts
+        extract_posts(file)
+      end
     end
 
-    def extract(file)
-      @filename = file
-      decoded = JSON.parse(File.read(file))
-      @count = decoded.size
+    def extract_messages(file)
+      messages = Hash.new(0)
+      @decoded.each do |message|
+        messages[message["channel_id"]] += 1
+      end
+      puts JSON.pretty_generate(messages)
 
+      #
+      exit
+    end
+
+    def extract_posts(file)
+      @count = @decoded.size
       links = []
       @mentions = 0
       @leadings = 0
@@ -28,7 +49,7 @@ module ADNCV
       @clients = Hash.new(0)
       @freq = Hash.new(0)
 
-      decoded.each do |post|
+      @decoded.each do |post|
         @clients[post["source"]["name"]] += 1
         m = post["entities"]["mentions"]
         l = post["entities"]["links"]
@@ -66,18 +87,17 @@ module ADNCV
         @freq[[dd.year, dd.month]] += 1
       end
 
-      all_directed = directed.sort_by {|k,v| v}
+      @all_directed = directed.sort_by {|k,v| v}
       @all_clients = @clients.sort_by {|k,v| v}
       @all_mentioned = mentioned.sort_by {|k,v| v}.uniq
       @all_links = links.uniq.sort
       @names = @all_mentioned.map {|k,v| "@#{k} (#{v})"}
       @sources = @all_clients.map {|k,v| "#{k} (#{v})"}
-      @directed_users = all_directed.uniq.map {|k,v| "@#{k} (#{v})"}
+      @directed_users = @all_directed.uniq.map {|k,v| "@#{k} (#{v})"}
 
       @without_mentions = count - @mentions
       @mentions_not_directed = @mentions - @leadings
       @mentions_not_replies = @mentions - @replies
-
     end
 
     def export(options)
