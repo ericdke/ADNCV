@@ -4,7 +4,7 @@
 
 Statistics from your App.net data.
 
-1. [Download](https://account.app.net/settings/content/) your ADN data
+1. [Download](https://account.app.net/settings/content/) your ADN data **before 2017/03/14**.
 
 2. Install: 
 
